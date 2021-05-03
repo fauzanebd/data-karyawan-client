@@ -1,25 +1,45 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Home from './Home';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import EmployeesList from './EmployeesList';
+import EmployeeEdit from './EmployeeEdit';
+import Api from './Api';
+import About from './About'
+import NavBar from './NavBar';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const api = new Api();
+
+class App extends Component {
+
+  render() {
+    const navbar = <NavBar/>;
+
+    return (
+        <Router>
+          <Switch>
+            <Route
+                path='/'
+                exact={true}
+                render={(props) => <Home {...props} api={api} navbar={navbar}/>}
+            />
+            <Route
+                path='/employees'
+                exact={true}
+                render={(props) => <EmployeesList {...props} api={api} navbar={navbar}/>}
+            />
+            <Route
+                path='/employees/:id'
+                render={(props) => <EmployeeEdit {...props} api={api} navbar={navbar}/>}
+            />
+            <Route
+                path='/about'
+                render={ ( props ) => <About {...props} api={api} navbar={navbar}/> }
+            />
+          </Switch>
+        </Router>
+    )
+  }
 }
 
 export default App;
