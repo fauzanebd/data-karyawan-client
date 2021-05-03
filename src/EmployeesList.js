@@ -41,13 +41,18 @@ class EmployeesList extends Component {
             )
         }
         else {
-            const body = await response.json();
-            const employees = body._embedded.employees;
-            this.setState({
-                employees: employees,
-                isLoading: false,
-                errorMessage: null
-            });
+            try {
+                const body = await response.json();
+                console.log('response data?', body)
+                const employees = body._embedded.employees;
+                this.setState({
+                    employees: employees,
+                    isLoading: false,
+                    errorMessage: null
+                });
+            } catch(error) {
+                console.log('Error is Here!')
+            }
         }
     }
 
