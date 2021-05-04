@@ -4,12 +4,14 @@ class Api {
         this.authToken = authToken;
     }
 
+    ApiURL = "https://salty-earth-69832.herokuapp.com/https://data-karyawan-api.herokuapp.com/api/employees";
+
     headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
 
-    BASE_URL = '/api/employees';
+    // BASE_URL = '/api/employees';
 
     createHeaders() {
         return this.authToken ? {
@@ -19,28 +21,28 @@ class Api {
     }
 
     async getAll() {
-        return await fetch(this.BASE_URL, {
+        return await fetch(this.ApiURL, {
             method: 'GET',
             headers: this.createHeaders()
         });
     }
 
     async getById(id) {
-        return await fetch(`${this.BASE_URL}/${id}`, {
+        return await fetch(`${this.ApiURL}/${id}`, {
             method: 'GET',
             headers: this.createHeaders()
         });
     }
 
     async delete(id) {
-        return await fetch(`${this.BASE_URL}/${id}`, {
+        return await fetch(`${this.ApiURL}/${id}`, {
             method: 'DELETE',
             headers: this.createHeaders()
         });
     }
 
     async update(item) {
-        return await fetch(`${this.BASE_URL}/${item.id}`, {
+        return await fetch(`${this.ApiURL}/${item.id}`, {
             method:'PUT',
             headers: this.createHeaders(),
             body: JSON.stringify(item),
@@ -48,7 +50,7 @@ class Api {
     }
 
     async create(item) {
-        return await fetch(this.BASE_URL, {
+        return await fetch(this.ApiURL, {
             method:'POST',
             headers: this.createHeaders(),
             body: JSON.stringify(item),
