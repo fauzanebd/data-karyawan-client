@@ -21,14 +21,7 @@ class Api {
     async getAll() {
         return await fetch(this.BASE_URL, {
             method: 'GET',
-            headers: this.authToken? {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer'+this.authToken
-            }:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+            headers: this.createHeaders()
         });
     }
 
